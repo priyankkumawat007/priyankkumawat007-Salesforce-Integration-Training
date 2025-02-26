@@ -23,9 +23,9 @@ global with sharing class AccountResource {
     @HTTPGet
     global static List<Account> getAccount() {
         RestRequest  accountRequest = RestContext.request;
-        String AccountRequestURI = accountRequest.requestURI;
-        String AccountId = String.valueOf(AccountRequestURI.substring(AccountRequestURI.lastIndexOf('/')+1));
-        List<Account> acc = [SELECT Id, Name FROM Account WHERE Id =: AccountId];
+        String accountRequestURI = accountRequest.requestURI;
+        String accountId = String.valueOf(accountRequestURI.substring(accountRequestURI.lastIndexOf('/')+1));
+        List<Account> acc = [SELECT Id, Name FROM Account WHERE Id =: accountId];
         return acc;
     }
 	/**
