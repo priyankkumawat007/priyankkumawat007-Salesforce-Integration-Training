@@ -22,10 +22,9 @@ global with sharing class AccountResource {
     **/
     @HTTPGet
     global static List<Account> getAccount() {
-        RestRequest  AccountRequest = RestContext.request;
-        String AccountRequestURI = AccountRequest.requestURI;
+        RestRequest  accountRequest = RestContext.request;
+        String AccountRequestURI = accountRequest.requestURI;
         String AccountId = String.valueOf(AccountRequestURI.substring(AccountRequestURI.lastIndexOf('/')+1));
-        System.debug(AccountId);
         List<Account> acc = [SELECT Id, Name FROM Account WHERE Id =: AccountId];
         return acc;
     }
@@ -72,7 +71,6 @@ global with sharing class AccountResource {
             resultList.add(conId);  
         } catch(DmlException e) {
             if(e.getMessage().contains('DUPLICATES_DETECTED')){
-				System.debug('Inside catch');
                 resultList.add(String.valueOf(newAccounts.isEmpty() ? existAcc[0].Id : newContacts[0].Id));
 				resultList.add('Duplicate Email');
             }
